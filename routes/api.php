@@ -19,4 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::put('employees/{uuid}', [EmployeeController::class, 'update'])->name('employee.update');
+Route::delete('employees/{uuid}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+Route::post('employees', [EmployeeController::class, 'store'])->name('employee.store');
+Route::get('employees/{uuid}', [EmployeeController::class, 'show'])->name('employee.show');
 Route::get('employees', [EmployeeController::class, 'index'])->name('employee.index');

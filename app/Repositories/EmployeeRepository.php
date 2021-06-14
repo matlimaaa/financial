@@ -14,8 +14,42 @@ class EmployeeRepository implements EmployeeRepositoryInterface
         $this->entity = $employee;
     }
 
-    public function getEmployees()
+    public function getEmployees(int $per_page)
     {
-        return $this->entity->all();
+        return $this->entity->paginate($per_page);
+    }
+
+    public function getEmployeeByUuid(string $uuid)
+    {
+        return $this->entity->where('uuid', $uuid)->first();
+    }
+
+    public function createNewEmployee(array $request)
+    {
+        $employee = $this->entity->create($request);
+        return $employee;
+    }
+    
+    public function updateEmployee(array $request, $uuid)
+    {
+        $employee = $this->entity->where('uuid', $uuid)->first();
+        if(!$employee)
+            return response()->json(['message' => 'Not Found'], 404);
+
+        $employee->update($request);
+
+        return $employee;
+    }
+
+    public function deleteEmployee(string $uuid)
+    {
+        $employee = $this->entity->where('uuid', $uuid)->first();
+        
+        if(!$employee)
+            return response()->json(['message' => 'Not Found'], 404 );
+
+        $employee->delete();
+        
+        return response()->json([], 200);
     }
 }
