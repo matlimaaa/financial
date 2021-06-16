@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
+use App\Repositories\Contracts\UserRepositoryInterface;
+
 use App\Repositories\EmployeeRepository;
+use App\Repositories\UserRepository;
+
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -16,18 +20,24 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register()
     {
         /**
-         * **********************************************************************
-         *                    LOGICA IMPLEMENTADA A INTERFACE                   *
-         * **********************************************************************
-         * Quando eu tentar injetar a EmployeeRepositoryInterface no Service
-         * Layer, estarei criando um objeto EmployeeRepository, uma vez que
-         * não é possível fazer a instância de um objetod e uma interface.
-         * **********************************************************************
+         * *****************************************************************************
+         *                          LOGICA IMPLEMENTADA A INTERFACE                    *
+         * *****************************************************************************
+         * Quando tentar injetar <class>RepositoryInterface(exemplo: UserReposi...)
+         * no Service Layer, estarei criando um objeto 
+         * <class>Repository(exemplo: UserReposi...),
+         * uma vez que não é possível fazer a instância de um objetod e uma interface.
+         * *****************************************************************************
          */
 
         $this->app->bind(
             EmployeeRepositoryInterface::class,
             EmployeeRepository::class
+        );
+
+        $this->app->bind(
+            UserRepositoryInterface::class,
+            UserRepository::class
         );
     }
 

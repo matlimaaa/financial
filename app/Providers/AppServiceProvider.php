@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Models\Employee;
+use App\Models\User;
+
 use App\Observers\EmployeeObserver;
+use App\Observers\UserObserver;
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         
         Employee::observe(EmployeeObserver::class);
+        User::observe(UserObserver::class);
     }
 }

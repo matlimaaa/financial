@@ -30,10 +30,9 @@ class EmployeeRepository implements EmployeeRepositoryInterface
         return $employee;
     }
     
-    public function updateEmployee(array $request, $uuid)
+    public function updateEmployee(array $request, string $uuid)
     {
-        $employee = $this->entity->where('uuid', $uuid)->first();
-        if(!$employee)
+        if(!$employee = $this->entity->where('uuid', $uuid)->first())
             return response()->json(['message' => 'Not Found'], 404);
 
         $employee->update($request);

@@ -13,6 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
+        /**
+         * Campos com tipo BOOLEAN, o true irá confirmar, exemplo.:
+         * admin: true => esse usuário é um administrador.
+         * status: true => esse usuário está com Login ativo na plataforma.
+         * O mesmo vale ao contrário (false).
+         */
+        
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
@@ -20,8 +27,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('admin');
-            $table->boolean('status');
+            $table->boolean('admin')->default(false); // não é admin
+            $table->boolean('status')->default(true); // login ativo
 
             $table->unsignedBigInteger('employee_id');
 

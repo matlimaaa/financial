@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::put('employees/{uuid}', [EmployeeController::class, 'update'])->name('employee.update');
+Route::delete('users/{uuid}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::put('users/{uuid}', [UserController::class, 'update'])->name('user.update');
+Route::post('users', [UserController::class, 'store'])->name('user.store');
+Route::get('users/{uuid}', [UserController::class, 'show'])->name('user.show');
+Route::get('users', [UserController::class, 'index'])->name('user.index');
+
 Route::delete('employees/{uuid}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
+Route::put('employees/{uuid}', [EmployeeController::class, 'update'])->name('employee.update');
 Route::post('employees', [EmployeeController::class, 'store'])->name('employee.store');
 Route::get('employees/{uuid}', [EmployeeController::class, 'show'])->name('employee.show');
 Route::get('employees', [EmployeeController::class, 'index'])->name('employee.index');

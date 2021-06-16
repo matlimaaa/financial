@@ -3,18 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\StoreUpdateEmployee;
+use App\Http\Requests\Api\ValidateEmployee;
 use App\Http\Resources\EmployeeResource;
 use App\Services\EmployeeService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
-    protected $employeeService;
+    protected $employeeService, $userService;
 
-    public function __construct(EmployeeService $employeeService)
+    public function __construct(EmployeeService $employeeService, UserService $userService)
     {
         $this->employeeService = $employeeService;
+        $this->userService = $userService;
     }
 
     public function index(Request $request)
@@ -44,13 +46,16 @@ class EmployeeController extends Controller
         return new EmployeeResource($employee);
     }
     
-    public function store(StoreUpdateEmployee $request)
+    public function store(ValidateEmployee $request)
     {
         $employee = $this->employeeService->createNewEmployee($request->all());
+        $request['employee_id'] = $employee->id;
+        
+        $user = $this->userService->createNewUser($request->all());
         return new EmployeeResource($employee);
     }
 
-    public function update(StoreUpdateEmployee $request, $uuid)
+    public function update(ValidateEmployee $request, $uuid)
     {
         $employee = $this->employeeService->updateEmployee($request->all(), $uuid);
         return new EmployeeResource($employee);

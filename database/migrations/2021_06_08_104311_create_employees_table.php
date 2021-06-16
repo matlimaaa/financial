@@ -18,8 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->string('uuid');
             $table->string('name');
             $table->string('cpf')->unique();
-            $table->string('post_name');
-            $table->boolean('send_image_receipt');
+            $table->boolean('send_image_receipt'); //true => enviar imagem
             $table->timestamps();
         });
     }
