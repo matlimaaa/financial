@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\EmployeeController;
+use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::delete('posts/{uuid}', [PostController::class, 'destroy'])->name('post.destroy');
+Route::put('posts/{uuid}', [PostController::class, 'update'])->name('post.update');
+Route::post('posts', [PostController::class, 'store'])->name('post.store');
+Route::get('posts/{uuid}', [PostController::class, 'show'])->name('post.show');
+Route::get('posts', [PostController::class, 'index'])->name('post.index');
 
 Route::delete('users/{uuid}', [UserController::class, 'destroy'])->name('user.destroy');
 Route::put('users/{uuid}', [UserController::class, 'update'])->name('user.update');

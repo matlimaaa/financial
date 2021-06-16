@@ -3,9 +3,11 @@
 namespace App\Providers;
 
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
+use App\Repositories\Contracts\PostRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 
 use App\Repositories\EmployeeRepository;
+use App\Repositories\PostRepository;
 use App\Repositories\UserRepository;
 
 use Illuminate\Support\ServiceProvider;
@@ -38,6 +40,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             UserRepositoryInterface::class,
             UserRepository::class
+        );
+
+        $this->app->bind(
+            PostRepositoryInterface::class,
+            PostRepository::class
         );
     }
 
