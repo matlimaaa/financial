@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BankController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\UserController;
@@ -20,6 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::delete('banks/{uuid}', [BankController::class, 'destroy'])->name('bank.destroy');
+Route::put('banks/{uuid}', [BankController::class, 'update'])->name('bank.update');
+Route::post('banks', [BankController::class, 'store'])->name('bank.store');
+Route::get('banks/{uuid}', [BankController::class, 'show'])->name('bank.show');
+Route::get('banks', [BankController::class, 'index'])->name('bank.index');
 
 Route::delete('posts/{uuid}', [PostController::class, 'destroy'])->name('post.destroy');
 Route::put('posts/{uuid}', [PostController::class, 'update'])->name('post.update');

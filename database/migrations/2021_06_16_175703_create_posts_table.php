@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->uuid('uuid');
             $table->string('name')->unique();
             $table->boolean('status')->default(true); // true para Posto ativo
 
