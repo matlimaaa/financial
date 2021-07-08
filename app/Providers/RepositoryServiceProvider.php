@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\AccountRepositoryInterface;
 use App\Repositories\Contracts\BankRepositoryInterface;
 use App\Repositories\Contracts\EmployeeRepositoryInterface;
 use App\Repositories\Contracts\PostRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 
+use App\Repositories\AccountRepository;
 use App\Repositories\BankRepository;
 use App\Repositories\EmployeeRepository;
 use App\Repositories\PostRepository;
@@ -52,6 +54,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             BankRepositoryInterface::class,
             BankRepository::class
+        );
+
+        $this->app->bind(
+            AccountRepositoryInterface::class,
+            AccountRepository::class
         );
     }
 

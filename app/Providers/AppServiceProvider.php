@@ -6,7 +6,8 @@ use App\Models\Bank;
 use App\Models\Employee;
 use App\Models\Post;
 use App\Models\User;
-
+use App\Models\Account;
+use App\Observers\AccountObserver;
 use App\Observers\BankObserver;
 use App\Observers\EmployeeObserver;
 use App\Observers\PostObserver;
@@ -40,5 +41,6 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         Post::observe(PostObserver::class);
         Bank::observe(BankObserver::class);
+        Account::observe(AccountObserver::class);
     }
 }

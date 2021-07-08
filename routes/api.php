@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AccountController;
 use App\Http\Controllers\Api\BankController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\PostController;
@@ -7,20 +8,15 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::delete('accounts/{uuid}', [AccountController::class, 'destroy'])->name('account.destroy');
+Route::put('accounts/{uuid}', [AccountController::class, 'update'])->name('account.update');
+Route::post('accounts', [AccountController::class, 'store'])->name('account.store');
+Route::get('accounts/{uuid}', [AccountController::class, 'show'])->name('account.show');
+Route::get('accounts', [AccountController::class, 'index'])->name('account.index');
 
 Route::delete('banks/{uuid}', [BankController::class, 'destroy'])->name('bank.destroy');
 Route::put('banks/{uuid}', [BankController::class, 'update'])->name('bank.update');
