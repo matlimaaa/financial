@@ -7,10 +7,12 @@ use App\Models\Employee;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Account;
+use App\Models\Transaction;
 use App\Observers\AccountObserver;
 use App\Observers\BankObserver;
 use App\Observers\EmployeeObserver;
 use App\Observers\PostObserver;
+use App\Observers\TransactionObserver;
 use App\Observers\UserObserver;
 
 use Illuminate\Support\Facades\Schema;
@@ -42,5 +44,6 @@ class AppServiceProvider extends ServiceProvider
         Post::observe(PostObserver::class);
         Bank::observe(BankObserver::class);
         Account::observe(AccountObserver::class);
+        Transaction::observe(TransactionObserver::class);
     }
 }

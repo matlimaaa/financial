@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Api\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateUser extends FormRequest
+class ValidateAuth extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,13 +23,10 @@ class ValidateUser extends FormRequest
      */
     public function rules()
     {
-        $uuid = $this->segment(3);
-
         return [
-            'name' => "required",
-            'email' => "required|email|unique:users,email,{$uuid},uuid",
-            'password' => "required|min:6|max:16",
-            'employee_id' => "required",
+            'email' => 'required|email',
+            'password' => 'required',
+            'device_name' => 'required',
         ];
     }
 }
